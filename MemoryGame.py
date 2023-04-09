@@ -1,21 +1,21 @@
-import Live as Game
+import os
 import random
 import time
 
 
-def play(game_difficulty):
+def memory_play(game_difficulty):
     sequence_number = generate_sequence(game_difficulty)
     display_text_for_user(sequence_number)
     user_number = get_list_from_user(game_difficulty)
 
     if is_list_equal(user_number, sequence_number):
         time.sleep(2)
-        Game.player_finished()
+        return True
     else:
         print('You lost !! Better luck next time!')
         print('The numbers that were generated are:', *sequence_number)
         time.sleep(2)
-        Game.player_finished()
+        return False
 
 
 def generate_sequence(game_difficulty):
@@ -56,5 +56,5 @@ def display_text_for_user(sequence_numbers):
     print(*sequence_numbers)
     time.sleep(0.7)
 
-    Game.clear_screen()
+    os.system('cls')
     print('\nNow try to repeat it!\n')
