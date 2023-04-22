@@ -3,6 +3,8 @@ from GuessGame import guess_play as load_guess_game
 from MemoryGame import memory_play as load_memory_game
 from CurrencyGame import currency_play as load_currency_roulette
 from GameDetails import game_details
+from Scores import update_score
+
 
 # - - - - - - - - - - - - - - - - - - - - - - Main Functions - - - - - - - - - - - - - - - - - -
 
@@ -45,11 +47,11 @@ def start_game(game, difficulty):
 
     if game == 1:
         state = load_memory_game(difficulty)
-    elif game == 2: 
+    elif game == 2:
         state = load_guess_game(difficulty)
-    else: 
+    else:
         state = load_currency_roulette(difficulty)
-        
+
     player_finished(state)
 
 
@@ -60,14 +62,17 @@ def valid_name():
             print('Please enter a valid name')
         else:
             return player_name
+
+
 # - - - - - - - - - - - - - - - - - - - FINISH GAME - - - - - - - - - - - - - - - - -
 
 
 def player_finished(won):
     if won:
         print('\nCongratulations! Great Job!')
+        update_score(game_details['game_difficulty'])
     else:
-        print('\nNice try!')
+        print('\nBetter luck next time !')
     print('\nWhat do you want to do next?\n')
     print('1 - Play Again')
     print('2 - Back to the main menu')

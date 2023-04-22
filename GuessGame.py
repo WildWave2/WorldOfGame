@@ -49,4 +49,3 @@ def guess_play(difficulty):
 
     get_guess_from_user(secret_number)
 
-
