@@ -1,8 +1,9 @@
-import Live as Game
-
+import os
+import random, time
+from GameDetails import game_details
 
 def generate_number():
-    generate = Game.random.randint(1, int(Game.game_details['game_difficulty']) * 20)
+    generate = random.randint(1, int(game_details['game_difficulty']) * 20)
     return generate
 
 
@@ -20,10 +21,9 @@ def get_guess_from_user(number):
         if int(tries) == 4:
             print('Sorry, you ran out of tries')
             print('The number was ', int(number))
-            Game.time.sleep(2)
-            Game.clear_screen()
-            Game.player_finished()
-            break
+            time.sleep(2)
+            os.system('cls')
+            return False
         if guess.isdigit():
             if int(guess) < int(number):
                 print('The number is higher.')
@@ -31,23 +31,21 @@ def get_guess_from_user(number):
                 print('The number is lower.')
             elif int(guess) == int(number):
                 print('You got it in', tries, 'tries!')
-                Game.time.sleep(2)
-                Game.clear_screen()
-                Game.player_finished()
-                break
+                time.sleep(2)
+                os.system('cls')
+                return True
         else:
             print('Please enter a valid number')
 
 
-def play(difficulty):
+def guess_play(difficulty):
     secret_number = generate_number()
 
     print('Im thinking of a number between 1 and ', int(difficulty * 20))
-    Game.time.sleep(1)
+    time.sleep(1)
     print('You have 3 tries to guess the number')
-    Game.time.sleep(1)
+    time.sleep(1)
     print('Do you think you can guess the number?')
 
     get_guess_from_user(secret_number)
-
 

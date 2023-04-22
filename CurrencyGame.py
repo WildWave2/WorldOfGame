@@ -1,4 +1,3 @@
-import Live as Game
 import random
 
 from currency_converter import CurrencyConverter
@@ -16,7 +15,7 @@ def difficulty_range(difficulty):
     return MAX_RANGE - (int(difficulty) - 1) * 2
 
 
-def play(difficulty):
+def currency_play(difficulty):
     usd_amount = random.randint(1, 100)
     ils_amount = convert_usd_to_ils(int(usd_amount))
     print(usd_amount)
@@ -28,11 +27,7 @@ def play(difficulty):
 
         if abs(user_guess - ils_amount) <= diff_range:
             print('You are close enough! The actual value is ', format(ils_amount), ' ILS.')
-            Game.player_finished()
-            play_again = input('Do you want to play again? (y/n) ')
-            if play_again.lower() == 'n':
-                Game.player_finished()
-                break
+            return True
         else:
             if user_guess < ils_amount:
                 print('Your guess is too low. Try again.')
